@@ -1,0 +1,39 @@
+transformers>=4.44
+accelerate>=0.34
+huggingface-hub>=0.24
+safetensors
+tokenizers
+sentencepiece
+timm
+bitsandbytes; platform_system!="Windows"   # optional 4/8-bit (skip on Win)
+
+ipykernel
+opencv-python
+numpy
+scipy
+scikit-image
+pillow
+pdfminer.six
+pdfplumber
+pypdf
+svgelements
+shapely
+networkx
+z3-solver
+rapidfuzz
+pytesseract
+pydantic>=2
+pydantic-settings
+omegaconf
+python-dotenv
+rich
+loguru
+typer[all]
+pandas
+polars
+matplotlib
+plotly
+streamlit
+neo4j                       # optional graph DB driver
+llava  # optional helper glue
+modelscope; python_version < "3.12"     # optional for MiniCPM convenience
