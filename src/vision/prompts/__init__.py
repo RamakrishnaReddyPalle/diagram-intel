@@ -1,1 +1,1 @@
-
+# plain JSON/YAML prompt templates
