@@ -1,0 +1,40 @@
+# model registry (ids, quant, max_tokens, prompts)
+vlm:
+  qwen2_vl:
+    enabled: true
+    hf_repo_id: "Qwen/Qwen2-VL-7B-Instruct"         # example id
+    local_path: "${paths.model_cache}/Qwen2-VL-7B-Instruct"
+    max_tokens: 1024
+    temperature: 0.0
+  minicpm_v2_6:
+    enabled: true
+    hf_repo_id: "openbmb/MiniCPM-V-2_6"             # example id
+    local_path: "${paths.model_cache}/MiniCPM-V-2_6"
+    max_tokens: 256
+    temperature: 0.0
+  llava_onevision:
+    enabled: false
+    hf_repo_id: "llava-hf/llava-onevision-qwen2-7b" # example id
+    local_path: "${paths.model_cache}/llava-onevision-qwen2-7b"
+  florence2:
+    enabled: false
+    hf_repo_id: "microsoft/Florence-2-base"         # example id
+    local_path: "${paths.model_cache}/Florence-2-base"
+  pix2struct:
+    enabled: false
+    hf_repo_id: "google/pix2struct-textcaps-base"   # example id
+    local_path: "${paths.model_cache}/pix2struct-textcaps-base"
+  donut:
+    enabled: true
+    hf_repo_id: "naver-clova-ix/donut-base"
+    local_path: "${paths.model_cache}/donut-base"
+  nougat:
+    enabled: false
+    hf_repo_id: "facebook/nougat-base"
+    local_path: "${paths.model_cache}/nougat-base"
+
+prompts:
+  labels_reader: "src/vision/prompts/read_labels.json"
+  symbol_classifier: "src/vision/prompts/classify_symbol.json"
+  component_summary: "src/vision/prompts/summarize_component.json"
+  table_read: "src/vision/prompts/table_read.json"

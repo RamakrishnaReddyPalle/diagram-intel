@@ -1,0 +1,20 @@
+# which phases on/off, thresholds, tile sizes, DPI
+phases:
+  ingest: true
+  tiling: true
+  read_labels: true
+  symbol_typing: true
+  wires_geometry: true
+  stitch_nets: true
+  constraints: true
+  cross_sheet: true
+  summaries: true
+  export_artifacts: true
+
+thresholds:
+  text_confidence_min: 0.55
+  symbol_confidence_min: 0.50
+  snap_distance_px: 12
+  angle_tolerance_deg: 20
+
+use_vector_parse_first: true  # prefer svg text/lines before VLM

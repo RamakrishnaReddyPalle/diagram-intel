@@ -1,0 +1,23 @@
+# electrical rulebook + inference rules
+rulebook:
+  MCCB_TP:
+    ports_in: 3
+    ports_out: 3
+    phases: ["L1","L2","L3"]
+  MCCB_TPN:
+    ports_in: 4
+    ports_out: 4
+    phases: ["L1","L2","L3","N"]
+  RCCB_2P:
+    ports_in: 2
+    ports_out: 2
+    requires_neutral: true
+  CONTACTOR_3P:
+    contacts: 3
+    coil_required: true
+net_rules:
+  phase_consistency: true
+  neutral_presence_on_tpn: true
+  disallow_crossing_without_junction: true
+refine:
+  max_recursions: 3

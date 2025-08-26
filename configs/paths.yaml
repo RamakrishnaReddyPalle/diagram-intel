@@ -1,0 +1,9 @@
+# absolute/relative paths (data, models, caches)
+paths:
+  data_root: "./data"
+  input_pdfs: "${paths.data_root}/input_pdfs"
+  raw:        "${paths.data_root}/raw"
+  interim:    "${paths.data_root}/interim"
+  processed:  "${paths.data_root}/processed"
+  exports:    "${paths.data_root}/exports"
+  model_cache: "./models/cache"

@@ -1,0 +1,14 @@
+# core switches: device, precision, caching, logging
+runtime:
+  device: ${env:DEVICE, "cpu"}
+  precision: ${env:PRECISION, "float16"}
+  workers: 4
+  seed: 42
+  dpi: 900
+  tile:
+    micro_size: 512
+    meso_size: 1024
+    macro_size: 2048
+    overlap: 0.15
+logging:
+  level: ${env:LOG_LEVEL, "INFO"}
