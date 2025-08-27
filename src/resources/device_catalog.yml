@@ -1,0 +1,43 @@
+types:
+  - id: MCCB_TP
+    name: MCCB 3P
+    ports_expected: ["L1","L2","L3"]
+    notes: "Molded Case Circuit Breaker, 3-pole"
+    synonyms: ["MCCB", "3P MCCB", "TP MCCB"]
+  - id: MCCB_TPN
+    name: MCCB 3P+N (TPN)
+    ports_expected: ["L1","L2","L3","N"]
+    notes: "MCCB TPN"
+    synonyms: ["TPN", "MCCB TPN", "3P+N MCCB"]
+  - id: MCB_SP
+    name: MCB SP
+    ports_expected: ["L"]
+    synonyms: ["MCB", "SP MCB", "1P"]
+  - id: MCB_DP
+    name: MCB DP
+    ports_expected: ["L","N"]
+    synonyms: ["DP MCB", "2P"]
+  - id: RCCB_2P
+    name: RCCB 2P
+    ports_expected: ["L","N"]
+    synonyms: ["ELCB", "RCCB", "RCD"]
+  - id: RCBO_SP
+    name: RCBO SP+N
+    ports_expected: ["L","N"]
+    synonyms: ["RCBO", "SPN RCBO"]
+  - id: CONTACTOR_3P
+    name: Contactor 3P
+    ports_expected: ["L1","L2","L3"]
+    synonyms: ["Contactor", "3P Contactor"]
+  - id: ISOLATOR_TPN
+    name: Isolator TPN
+    ports_expected: ["L1","L2","L3","N"]
+    synonyms: ["Isolator", "TPN Isolator"]
+  - id: TB_BLOCK
+    name: Terminal Block
+    ports_expected: []
+    synonyms: ["TB", "Terminal", "TB1", "TB2"]
+  - id: METER_3P
+    name: 3-Phase Meter
+    ports_expected: ["L1","L2","L3","N"]
+    synonyms: ["kWh Meter", "Energy Meter", "3Φ Meter"]
