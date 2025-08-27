@@ -1,0 +1,60 @@
+# configs/constraints/packs/generic.yaml
+name: generic
+doc: |
+  Generic low-voltage internal wiring heuristics based on IEC series:
+  - IEC 60617 (graphical symbols, device classes)
+  - IEC 60038 (standard voltages, e.g., 230/400 V three-phase LV)
+  - RCCB per IEC 61008-1 and RCD overview per IEC 60755
+  Used only for text/label inferences; does not replace a formal design check.
+
+phases:
+  labels: ["L1","L2","L3","N","PE","PEN","L","R","S","T"]
+  bundles:
+    - pattern: "(L1\\s*/?\\s*L2\\s*/?\\s*L3)(\\s*/?\\s*N)?"
+      phase: "L1/L2/L3/N"
+    - pattern: "\\b3\\s*phase\\b"
+      phase: "L1/L2/L3"
+neutral:
+  labels: ["N","Neutral"]
+protective:
+  labels: ["PE","Earth","GND","Ground","Protective Earth"]
+
+inference:
+  typing_hints_contains:
+    MCCB: ["mccb"]
+    MCB: ["mcb"]
+    RCCB: ["rccb","rcd","elcb"]
+    TPN: ["tpn","tp&n","t p n"]
+    SPD: ["spd","surge"]
+    TB: ["tb","terminal block","terminal"]
+    CONTACTOR: ["contactor","coil"]
+    ISOLATOR: ["isolator","switch disconnector"]
+    ACCL: ["accl","ats","changeover","selector","2pole, 3way","auto"]
+  source_keywords:
+    grid: ["grid","mains","incomer","from meter","utility","service"]
+    dg: ["dg","diesel gen","generator"]
+    ups: ["ups"]
+    pv: ["pv","solar","inverter"]
+    stabilizer: ["stabilizer","servo"]
+  load_keywords:
+    lift: ["lift","elevator"]
+    hvac: ["hvac","vrv","air cond","ahu","chiller"]
+    lighting: ["lighting","lights"]
+    power: ["power","socket","raw power"]
+    ev: ["ev charger","ev"]
+    heat_pump: ["heat pump"]
+    floor: ["floor","first floor","second floor","basement"]
+  ratings_regex:
+    current_a: "(\\d{1,4})\\s*A\\b"
+    leakage_mA: "(\\d{1,3})\\s*mA\\b"
+
+rules:
+  net:
+    phase_consistency: true
+    disallow_crossing_without_junction: true
+  component:
+    # very light defaults
+    expected_ports_by_label:
+      MCCB: [L1, L2, L3, N]
+      RCCB: [L, N]
+      TPN:  [L1, L2, L3, N]
