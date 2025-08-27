@@ -38,3 +38,21 @@ class Sheet(BaseModel):
     id: str
     size: Tuple[int,int]
     legend: dict = {}
+
+class CandidateAlt(BaseModel):
+    type: Optional[str]
+    confidence: float = 0.0
+
+class ComponentCandidate(BaseModel):
+    id: str                  # e.g., "{pdf}:{page}:meso:rXXXcYYY"
+    pdf: str
+    page: int
+    tile_path: str
+    tile_bbox: BBox
+    type: Optional[str] = None
+    confidence: float = 0.0
+    ports_expected: list = []
+    notes: Optional[str] = None
+    alternatives: List[CandidateAlt] = []
+    labels_context: List[str] = []      # labels used in prompt
+    source_model: Optional[str] = None
