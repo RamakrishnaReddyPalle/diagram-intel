@@ -1,0 +1,37 @@
+# configs/constraints/packs/indian_power.yaml
+name: indian_power
+doc: |
+  India-specific vocabulary overlay for internal wiring drawings:
+  - IS 732:2019 (wiring)
+  - IS 3043:2018 (earthing)
+  - IS 11353:1985 (colour identification; green/yellow reserved for PE)
+  Adds EB/DG/ACCL/RYB slang and distribution board conventions (TPN).
+
+vocabulary:
+  eb: ["eb","electricity board","utility"]
+  ryb: ["r","y","b"]    # phase mnemonics often seen in legends/tags
+  db: ["db","sdb","mdb","db-","-db"]
+  tpn: ["tpn","tp&n"]
+
+inference:
+  typing_hints_contains:
+    ACCL: ["accl","auto changeover","changeover","ats","2pole, 3way","selector"]
+    TPN: ["tpn","tp&n"]
+  source_keywords:
+    grid: ["eb","electricity board","mains","incomer"]
+    dg: ["dg","diesel gen","genset","generator"]
+    pv: ["pv","solar","inverter"]
+  load_keywords:
+    lift: ["lift"]
+    hvac: ["vrv","ac","air conditioner","ahu"]
+    ev: ["ev charger"]
+    floors: ["first floor","second floor","basement","ground floor"]
+
+colour_code:
+  protective: ["green/yellow","green-yellow"]   # IS 11353 reserved for PE
+  neutral: ["black","blue"]                     # neutral often black; blue also encountered
+  phase: ["red","yellow","blue"]                # RYB legacy palette
+
+rules:
+  net:
+    neutral_presence_on_tpn: true
