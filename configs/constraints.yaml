@@ -21,3 +21,24 @@ net_rules:
   disallow_crossing_without_junction: true
 refine:
   max_recursions: 3
+
+nets:
+  max_nodes_warning: 5000    # flag suspicious “giant nets”
+  max_nodes_error: 15000
+
+ports:
+  # how far a port can be from the component bbox edge before we call it off-edge
+  max_edge_distance_px: 6
+
+snap:
+  # if oversnapping suspected, try a tighter snap and re-scan locally
+  tighten_snap_px: 12
+
+components:
+  # crude name-based expectations (works even while type=None)
+  expected_ports_by_label:
+    MCCB: [L1, L2, L3, N]
+    RCCB: [L, N]
+    TPN:  [L1, L2, L3, N]
+    MCB:  []   # single-pole variants vary; don’t enforce yet
+

@@ -6,11 +6,23 @@ vlm:
     local_path: "${paths.model_cache}/Qwen2-VL-7B-Instruct"
     max_tokens: 1024
     temperature: 0.0
-  minicpm_v2_6:
+  qwen2_vl_2b:
     enabled: true
+    hf_repo_id: "Qwen/Qwen2-VL-2B-Instruct"
+    local_path: "${paths.model_cache}/Qwen2-VL-2B-Instruct"
+    max_tokens: 512
+    temperature: 0.0
+  minicpm_v2_6:
+    enabled: false
     hf_repo_id: "openbmb/MiniCPM-V-2_6"             # example id
     local_path: "${paths.model_cache}/MiniCPM-V-2_6"
     max_tokens: 256
+    temperature: 0.0
+  llava_v16_mistral_7b:
+    enabled: true
+    hf_repo_id: "llava-hf/llava-v1.6-mistral-7b-hf"
+    local_path: "${paths.model_cache}/llava-v1.6-mistral-7b-hf"
+    max_tokens: 512
     temperature: 0.0
   llava_onevision:
     enabled: false

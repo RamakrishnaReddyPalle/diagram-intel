@@ -18,3 +18,65 @@ thresholds:
   angle_tolerance_deg: 20
 
 use_vector_parse_first: true  # prefer svg text/lines before VLM
+
+labels:
+  use_vlm_on_micro: false   # turn on later if needed (CPU is slow)
+  max_tiles_vlm: 120        # safety cap if you enable VLM
+  min_vec_chars: 2          # vector text shorter than this is ignored
+  merge_dedup_fuzz: 88      # fuzzy match threshold to dedup vector + VLM labels
+
+symbols:
+  use_vlm_on_meso: true      # set true to run the classifier
+  max_tiles_vlm: 60          # keep small on CPU; raise later
+  min_labels_in_tile: 1      # only consider tiles with >= this many labels
+  select_top_by_labels: 200  # from all meso tiles, keep the top-K label-dense tiles
+  max_new_tokens: 180
+  temperature: 0.0
+
+prompts:
+  symbol_classifier: "src/vision/prompts/classify_symbol.json"
+
+merge:
+  iou_threshold: 0.30      # tiles with IoU >= this are clustered
+  touch_px: 32             # OR if edges are within this many pixels, cluster
+  prefer_higher_conf: true # pick the representative with highest conf
+  union_bbox: true         # merged bbox = union of tiles
+
+geometry:
+  binarize:
+    blocksize: 41      # odd, >=3
+    C: 7               # subtraction constant
+  skeletonize: true
+  hough:
+    threshold: 30
+    min_line_length: 40
+    max_line_gap: 8
+  merge_lines:
+    angle_deg_eps: 3.0
+    endpoint_px_eps: 6
+  snap:
+    snap_px: 24        # endpoint-to-bbox distance to snap a wire into a component
+    junction_px: 18    # cluster endpoints into junctions within this radius
+
+graph:
+  phase_label:
+    search_radius_px: 80       # nearby text radius around ports/junctions
+    min_token_votes: 1         # min votes to accept a phase token
+  export:
+    write_graphml: true
+    write_json: true
+
+ocr:
+  enable: true
+  prefer: "donut"          # or "pix2struct" or "nougat"
+  min_vec_text_threshold: 20   # if vector text count per page < this → OCR micro tiles
+
+vlm:
+  micro_labels_fallback: true  # if vec text < threshold, enable VLM micro prompts
+
+tables:
+  use_vlm: true   # VLM fallback for tables if vector/OCR fail (slower on CPU)
+
+
+
+

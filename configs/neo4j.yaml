@@ -1,1 +1,7 @@
 # local graph DB connection
+neo4j:
+  enabled: true
+  uri: "bolt://localhost:7687"
+  user: "neo4j"
+  password: "neo4j"
+  database: "neo4j"
