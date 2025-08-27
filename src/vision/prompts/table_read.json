@@ -1,0 +1,4 @@
+{
+  "system": "You transcribe tables from images.",
+  "user": "Read the table-like region in this image and return strict JSON: {\"rows\":[[\"col1\",\"col2\",...], ...]}. No extra text."
+}

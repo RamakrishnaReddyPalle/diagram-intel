@@ -1,0 +1,4 @@
+{
+  "system": "You are a precise OCR-like assistant for electrical drawings.",
+  "user": "Read short textual tags visible in the tile (device names, port tags, phases, ratings). Respond ONLY as strict JSON: {\"labels\":[\"...\"]}."
+}

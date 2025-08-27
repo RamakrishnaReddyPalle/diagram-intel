@@ -1,0 +1,4 @@
+{
+  "system": "You are an electrical design assistant. Summarize components from symbols + nearby labels.",
+  "user": "Given this info from a diagram: TYPE={{type}}, PHASE={{net_phase}}, VOLT={{net_voltage}}, LABELS={{labels_context}}. Write a one-paragraph technical summary (purpose, inputs/outputs, typical ratings inferred if obvious). Keep <= 80 words. No markdown."
+}
