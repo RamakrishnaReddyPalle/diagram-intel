@@ -1,0 +1,74 @@
+# generic rules only (portable)
+rulebook:
+  # Breakers / isolators (pole counts capture 1Φ and 3Φ+N variants)
+  MCCB_3P: { ports_in: 3, ports_out: 3, phases: [L1, L2, L3] }
+  MCCB_4P: { ports_in: 4, ports_out: 4, phases: [L1, L2, L3, N] }
+  MCB_1P:  { ports_in: 1, ports_out: 1 }
+  MCB_2P:  { ports_in: 2, ports_out: 2 }
+  MCB_3P:  { ports_in: 3, ports_out: 3 }
+  MCB_4P:  { ports_in: 4, ports_out: 4 }
+  ISOLATOR_2P: { ports_in: 2, ports_out: 2 }
+  ISOLATOR_4P: { ports_in: 4, ports_out: 4 }
+
+  # Residual-current devices (neutral normally present & switched for 4P)
+  RCCB_2P: { ports_in: 2, ports_out: 2, requires_neutral: true }
+  RCCB_4P: { ports_in: 4, ports_out: 4, requires_neutral: true }
+
+  # Surge protective device typical in 3Φ+N systems
+  SPD_4P:  { ports_in: 4, pe_required: true }  # L1 L2 L3 N + PE bonding
+
+  # TPN/3Φ+N outgoing (feeder) abstraction for board ways
+  TPN_OUTGOING: { ports: 4, phases: [L1, L2, L3, N] }
+
+  # Terminal block (generic multi-pole)
+  TB_MULTI: { min_poles: 2, max_poles: 96 }
+
+  # Automatic/Manual changeover (ACCL/ATS/selector) abstractions
+  ACCL_1PH: { sources: 2, poles: 2, outputs: 1, interlock: true, neutral_switched: true }
+  ACCL_3PH: { sources: 2, poles: 4, outputs: 1, interlock: true, neutral_switched: true }
+  THREEWAY_2P: { positions: 3, poles: 2, sources: 2, output: 1, interlock: true }
+
+net_rules:
+  phase_consistency: true         # a net shouldn't mix conflicting phase tags
+  neutral_presence_on_tpn: true   # 3Φ ways with N expected must actually include N
+  rccb_series_neutral: true       # L & N must traverse RCCB (no neutral bypass)
+  source_isolation: true          # separate sources bridged only via changeover/ATS
+  pv_isolation: true              # PV not backfeeding mains except via intended device
+  earth_isolated_from_live: soft  # warn if PE ties into L/N locally (soft)
+  disallow_crossing_without_junction: true
+
+refine: { max_recursions: 3 }
+
+nets:
+  max_nodes_warning: 2500
+  max_nodes_error: 15000
+
+ports:
+  max_edge_distance_px: 6         # "on-edge" tolerance for port anchors
+
+snap:
+  tighten_snap_px: 12
+
+components:
+  expected_ports_by_label:
+    MCCB: [L1, L2, L3, N]
+    MCB: []
+    RCCB: [L, N]
+    ISOLATOR: []
+    TPN: [L1, L2, L3, N]
+    SPD: [L1, L2, L3, N, PE]
+    ACCL: [SOURCE1, SOURCE2, LOAD, N]   # generic names; packs/project can alias
+    TB: []
+  area_limits:
+    component_bbox_area_frac_warn: 0.25
+    component_bbox_area_frac_error: 0.50
+  composite_heuristics:
+    max_labels_tokens_for_device_checks: 40
+
+
+inference:
+  enable: true
+  # leave empty here; packs will add language-specific hints / regexes
+  source_keywords: {}
+  load_keywords: []
+  typing_hints_contains: {}
